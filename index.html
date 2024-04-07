@@ -3,37 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alt Soft Node.js Quiz</title>
+    <title>Node.js Quiz</title>
 </head>
 <body>
-    <h1>Alt Soft Node.js Quiz </h1>
+    <h1>Node.js Quiz</h1>
     <form id="quizForm">
+        <!-- Questions and options will be dynamically added here -->
         <button type="submit">Submit Answers</button>
     </form>
+    <!-- Division to display the quiz result -->
     <div id="result"></div>
+
     <script>
+        // Fetch quiz questions from the server
         fetch('/quiz')
             .then(response => response.json())
             .then(questions => {
+                // Get the quiz form and result div elements
                 const quizForm = document.getElementById('quizForm');
                 const resultDiv = document.getElementById('result');
 
+                // Loop through each question received from the server
                 questions.forEach((question, index) => {
+                    // Create a new div for each question
                     const questionDiv = document.createElement('div');
+                    // Set inner HTML of the div with question number, text, and dropdown for options
                     questionDiv.innerHTML = `
                         <p>${index + 1}. ${question.question}</p>
                         <select name="answers">
                             ${question.options.map(option => `<option value="${option}">${option}</option>`).join('')}
                         </select>
                     `;
+                    // Insert the question div before the last child of the quiz form
                     quizForm.insertBefore(questionDiv, quizForm.lastChild);
                 });
 
+                // Add an event listener for form submission
                 quizForm.addEventListener('submit', (event) => {
+                    // Prevent the default form submission behavior
                     event.preventDefault();
+                    // Get the form data
                     const formData = new FormData(quizForm);
+                    // Convert form data to an array of user answers
                     const userAnswers = Array.from(formData.values());
                     
+                    // Submit user answers to the server
                     fetch('/quiz/submit', {
                         method: 'POST',
                         headers: {
@@ -43,6 +57,7 @@
                     })
                     .then(response => response.json())
                     .then(data => {
+                        // Display the quiz result
                         resultDiv.innerHTML = `
                             <h2>Quiz Result</h2>
                             <p>Your score: ${data.score}</p>

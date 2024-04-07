@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alt Soft Node.js Quiz</title>
+</head>
+<body>
+    <h1>Alt Soft Node.js Quiz </h1>
+    <form id="quizForm">
+        <button type="submit">Submit Answers</button>
+    </form>
+    <div id="result"></div>
+    <script>
+        fetch('/quiz')
+            .then(response => response.json())
+            .then(questions => {
+                const quizForm = document.getElementById('quizForm');
+                const resultDiv = document.getElementById('result');
+
+                questions.forEach((question, index) => {
+                    const questionDiv = document.createElement('div');
+                    questionDiv.innerHTML = `
+                        <p>${index + 1}. ${question.question}</p>
+                        <select name="answers">
+                            ${question.options.map(option => `<option value="${option}">${option}</option>`).join('')}
+                        </select>
+                    `;
+                    quizForm.insertBefore(questionDiv, quizForm.lastChild);
+                });
+
+                quizForm.addEventListener('submit', (event) => {
+                    event.preventDefault();
+                    const formData = new FormData(quizForm);
+                    const userAnswers = Array.from(formData.values());
+                    
+                    fetch('/quiz/submit', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ answers: userAnswers })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        resultDiv.innerHTML = `
+                            <h2>Quiz Result</h2>
+                            <p>Your score: ${data.score}</p>
+                        `;
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+            })
+            .catch(error => console.error('Error:', error));
+    </script>
+</body>
+</html>

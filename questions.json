@@ -1,0 +1,52 @@
+[
+    {
+        "question": "What is the primary purpose of Node.js?",
+        "options": ["Web Development", "Mobile Development", "Game Development", "Desktop Application Development"],
+        "correctAnswer": "Web Development"
+    },
+    {
+        "question": "Which module is used for handling file operations in Node.js?",
+        "options": ["fs", "http", "path", "net"],
+        "correctAnswer": "fs"
+    },
+    {
+        "question": "Which keyword is used to import modules in Node.js?",
+        "options": ["import", "require", "export", "use"],
+        "correctAnswer": "require"
+    },
+    {
+        "question": "What does npm stand for?",
+        "options": ["Node Package Manager", "New Project Maker", "Node Program Manager", "None of the above"],
+        "correctAnswer": "Node Package Manager"
+    },
+    {
+        "question": "Which of the following is NOT a core module in Node.js?",
+        "options": ["http", "fs", "mysql", "path"],
+        "correctAnswer": "mysql"
+    },
+    {
+        "question": "What is the default port number for HTTP server in Node.js?",
+        "options": ["80", "8080", "3000", "5000"],
+        "correctAnswer": "80"
+    },
+    {
+        "question": "What does the 'npm init' command do?",
+        "options": ["Initializes a new Node.js project", "Installs all dependencies", "Starts the Node.js server", "None of the above"],
+        "correctAnswer": "Initializes a new Node.js project"
+    },
+    {
+        "question": "Which function is used to print output in Node.js?",
+        "options": ["print()", "log()", "write()", "console.log()"],
+        "correctAnswer": "console.log()"
+    },
+    {
+        "question": "What is the role of the 'events' module in Node.js?",
+        "options": ["To handle events asynchronously", "To manipulate the DOM", "To interact with databases", "To create child processes"],
+        "correctAnswer": "To handle events asynchronously"
+    },
+    {
+        "question": "Which keyword is used to define a function in Node.js?",
+        "options": ["function", "define", "func", "fn"],
+        "correctAnswer": "function"
+    }
+]

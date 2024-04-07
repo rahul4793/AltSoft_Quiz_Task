@@ -13,4 +13,4 @@
 4)Now to run it locally 
   node index.js
 
-5)Now in your browser type http://localhost:8080/
+5)Now in your browser type http://localhost:8080
